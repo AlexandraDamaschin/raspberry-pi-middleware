@@ -1,0 +1,22 @@
+{
+  "name": "raspberry-pi-middleware",
+  "version": "1.0.0",
+  "description": "",
+  "main": "middleware.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/project-awesome-300/raspberry-pi-middleware.git"
+  },
+  "author": "Project Awesome Box Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/project-awesome-300/raspberry-pi-middleware/issues"
+  },
+  "homepage": "https://github.com/project-awesome-300/raspberry-pi-middleware#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
