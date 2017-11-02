@@ -11,6 +11,20 @@ module.exports = function (app) {
     res.send('Take Picture')
   })
 
+  app.get('/api/uploadImageToFirebase', function (req, res, next) {
+    api.upload_image_to_firebase()
+    next()
+  }, function (req, res) {
+    res.send('Upload Image to Firebase')
+  })
+
+  app.get('/api/syncGoogleStorage', function (req, res, next) {
+    api.sync_google_storage()
+    next()
+  }, function (req, res) {
+    res.send('Sync Google Storage')
+  })
+
   app.get('/api/takePictureHourly', function (req, res, next) {
     api.take_a_picture_hourly()
     next()

@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/project-awesome-300/raspberry-pi-middleware#readme",
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "firebase": "^4.6.0",
+    "firebase-admin": "^5.4.3"
   }
 }
