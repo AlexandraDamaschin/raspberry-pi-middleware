@@ -1,25 +1,46 @@
 const express = require('express')
 const app = express();
+const fs = require('fs');
+
+var port = process.env.PORT || 3000;
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var bodyParser = require('body-parser');
+var path = require('path');
 
 var firebaseAdmin = require("firebase-admin");
+var serviceAccount = require("./config/auth/projectawesomebox-6cbe8b5abac9.json");
 
-var serviceAccount = require("./auth/projectawesomebox-6cbe8b5abac9.json");
+//  configure app
+var configDB = require('./config/firebase/database.js');
 
-firebaseAdmin.initializeApp({
-  credential: firebaseAdmin.credential.cert(serviceAccount),
-  // databaseURL: "https://<DATABASE_NAME>.firebaseio.com"
-});
+// configure middleware
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('combined'));
+app.use(logger('common', {stream: fs.createWriteStream('./logs/access.log', {flags: 'a'})}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// var storage = firebaseAdmin.app().storage("gs://theprojectawesomebox.appspot.com/images");
-// var file = File.applicationStorageDirectory.resolvePath("20171101155538.jpg");
+//  view engine setup
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('views', path.join(__dirname, 'api/views'));
+app.set('view engine', 'ejs');
 
-// storage.put(file).then(function (snapshot) {
-//   console.log("Uploaded file.");
-// });
-
-var routes = require('./api/routes/apiRoutes');
+// define routes
+var routes = require('./config/routes/apiRoutes');
 routes(app);
 
-app.listen(3000, function () {
-  console.log('App listening')
+//  launch
+app.listen(port, function () {
+  console.log('App listening on port ' + port )
 })
+
+//  catch 404 and forward to error handler
+app.use(function (req, res, next) {
+  res.status(404).render('404', {title: "Sorry, page not found", session: req.sessionbo});
+});
+
+app.use(function (req, res, next) {
+  res.status(500).render('404', {title: "Sorry, page not found"});
+});
+exports = module.exports = app;

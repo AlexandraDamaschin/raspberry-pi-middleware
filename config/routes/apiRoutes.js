@@ -1,9 +1,13 @@
 'use strict'
 
 module.exports = function (app) {
-  var api = require('../controllers/apiController');
+  var api = require('../../api/controllers/apiController');
 
   // API Routes
+  app.get('/', function (req, res) {
+    res.send('hello, world!')
+  })
+
   app.get('/api/takePicture', function (req, res, next) {
     api.take_a_picture()
     next()

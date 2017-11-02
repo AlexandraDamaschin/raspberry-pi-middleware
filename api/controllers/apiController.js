@@ -1,8 +1,5 @@
 'use strict';
 
-// var storageRef = firebase.storage.ref();
-
-
 exports.take_a_picture = function (req, res) {
   var childProcess = require('child_process'),
     takePicture;
