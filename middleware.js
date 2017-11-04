@@ -1,15 +1,11 @@
 const express = require('express')
 const app = express();
 const fs = require('fs');
-
 var port = process.env.PORT || 3000;
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var path = require('path');
-
-var firebaseAdmin = require("firebase-admin");
-var serviceAccount = require("./config/auth/projectawesomebox-6cbe8b5abac9.json");
 
 //  configure app
 var configDB = require('./config/firebase/database.js');

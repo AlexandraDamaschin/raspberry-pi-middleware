@@ -2,10 +2,32 @@
 
 module.exports = function (app) {
   var api = require('../../api/controllers/apiController');
+  var firebase = require('../../api/controllers/firebaseController');
+  var raspiStill = require('../../api/controllers/raspiStillController');
 
+  
+  app.get('/firebase', function (req, res, next) {
+    firebase.upload_file()
+    next()
+  }, function (req, res) {
+    res.send('upload file!')
+  })
+
+  app.get('/raspistill', function (req, res, next) {
+    raspiStill.take_photo()
+    next()
+  }, function (req, res) {
+    res.send('take photo!')
+  })
+
+  
   // API Routes
   app.get('/', function (req, res) {
     res.send('hello, world!')
+  })
+
+  app.get('/api', function (req, res) {
+    res.render('api.ejs');
   })
 
   app.get('/api/takePicture', function (req, res, next) {

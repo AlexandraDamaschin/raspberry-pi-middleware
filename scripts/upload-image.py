@@ -1,3 +1,37 @@
+import firebase_admin
+from firebase_admin import credentials
+import picamera
+import time
+import os
+
+cred = credentials.Certificate("path/to/serviceAccountKey.json")
+firebase_admin.initialize_app(cred)
+
+# imageFileName = datetime.datetime.now().time()
+
+with picamera.PiCamera() as camera:
+    camera.resolution = (1024, 768)
+    camera.start_preview()
+    camera.iso = 800
+    camera.brightness = 60
+    camera.hflip = True
+    camera.vflip = True
+    # Camera warm-up time
+    time.sleep(2)
+    camera.capture('./imagesCaptured/imageCaptured.jpg')
+
+# os.rename("./imagesCaptured/imageCaptured.jpg", time.strftime("./imagesCaptured/%Y%m%d%H%M%S.jpg"))
+
+
+
+
+
+
+
+
+
+
+
 # # Import gcloud
 # from google.cloud import storage
 
