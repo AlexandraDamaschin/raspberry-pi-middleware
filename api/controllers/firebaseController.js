@@ -8,8 +8,8 @@ var config = {
 var storage = new Storage(config);
 const bucketName = 'prj300-its.appspot.com';
 
-exports.upload_file = function (req, res) {
-    const filename = './uploads/image2.jpg';
+exports.upload_file = function (filePath, req, res) {
+    var filename = filePath;
 
     storage
         .bucket(bucketName)

@@ -4,10 +4,19 @@ module.exports = function (app) {
   var api = require('../../api/controllers/apiController');
   var firebase = require('../../api/controllers/firebaseController');
   var raspiStill = require('../../api/controllers/raspiStillController');
-
+  var camera = require('../../api/controllers/cameraController');
   
+
+  app.get('/camera', function (req, res, next) {
+    camera.take_upload_picture()
+    next()
+  }, function (req, res) {
+    res.send('take and upload')
+  })
+
+
   app.get('/firebase', function (req, res, next) {
-    firebase.upload_file()
+    firebase.upload_file('./uploads/image3.jpg')
     next()
   }, function (req, res) {
     res.send('upload file!')
