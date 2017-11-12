@@ -1,3 +1,7 @@
+# KEY STORE 
+config/auth
+
+
 # Logs
 logs
 *.log
