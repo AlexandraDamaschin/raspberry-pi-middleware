@@ -17,7 +17,7 @@ class GCloudRoute extends route_1.BaseRoute {
             console.log('GET META DATA ON: ' + req.params.name);
             gcloudModel_1.getFileMetaData(gCloud, req.params.name);
         });
-        router.get("/upload/:name", (req, res, next) => {
+        router.put("/upload/:name", (req, res, next) => {
             console.log('UPLOAD FILE: ' + req.params.name);
             gcloudModel_1.uploadFile(gCloud, req.params.name);
         });
