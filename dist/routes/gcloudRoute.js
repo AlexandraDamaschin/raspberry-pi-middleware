@@ -25,6 +25,9 @@ class GCloudRoute extends route_1.BaseRoute {
             console.log('DOWNLOAD FILE: ' + req.params.name);
             gcloudModel_1.downloadFile(gCloud, req.params.name);
         });
+        router.post("/getFileMetadata", (req, res, next) => {
+            console.log('getFileMetadata called....');
+        });
     }
     constructor() {
         super();

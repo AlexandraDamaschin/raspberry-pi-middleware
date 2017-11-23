@@ -34,6 +34,10 @@ export class GCloudRoute extends BaseRoute {
       downloadFile(gCloud, req.params.name);
     });
 
+    router.post("/getFileMetadata", (req: Request, res: Response, next: NextFunction) => {
+      console.log('getFileMetadata called....');
+    });
+
 
   }
 

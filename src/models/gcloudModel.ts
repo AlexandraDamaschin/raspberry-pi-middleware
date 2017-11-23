@@ -111,4 +111,3 @@ export function uploadFile(c: GCloud, fileName) {
 export function downloadFile(c: GCloud, fileName) {
   c.download_file(fileName);
 }
-
