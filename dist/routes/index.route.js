@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const route_1 = require("./route");
-const cameraModel_1 = require("../models/cameraModel");
-let camera = new cameraModel_1.Camera();
+const camera_model_1 = require("../models/camera.model");
+let camera = new camera_model_1.Camera();
 class IndexRoute extends route_1.BaseRoute {
     static create(router) {
         console.log("Creating index route.");
@@ -10,7 +10,7 @@ class IndexRoute extends route_1.BaseRoute {
             new IndexRoute().index(req, res, next);
         });
         router.get("/camera", (req, res, next) => {
-            cameraModel_1.takeUploadFile(camera);
+            camera_model_1.takeUploadFile(camera);
         });
     }
     constructor() {

@@ -1,6 +1,6 @@
-import { FirebaseDB, testFirebaseDB, uploadPhotoDetails, uploadTestData } from "../models/firebasedbModel";
 import { BaseRoute } from "./route";
 import { NextFunction, Request, Response, Router } from "express";
+import { FirebaseDB, testFirebaseDB, uploadPhotoDetails, uploadTestData } from "../models/firebasedb.model";
 
 let firebaseDB = new FirebaseDB();
 

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { BaseRoute } from "./route";
-import { Camera, takeUploadFile } from "../models/cameraModel"
+import { Camera, takeUploadFile } from "../models/camera.model"
 
 let camera = new Camera();
 

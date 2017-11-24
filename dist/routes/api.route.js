@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const apiModel_1 = require("../models/apiModel");
 const route_1 = require("./route");
-let api = new apiModel_1.API();
+const api_model_1 = require("../models/api.model");
+let api = new api_model_1.API();
 class APIRoute extends route_1.BaseRoute {
     static create(router) {
         console.log("Creating api routes.");

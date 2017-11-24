@@ -7,10 +7,10 @@ const logger = require("morgan");
 const path = require("path");
 const errorHandler = require("errorhandler");
 const methodOverride = require("method-override");
-const indexRoute_1 = require("./routes/indexRoute");
-const gcloudRoute_1 = require("./routes/gcloudRoute");
-const firebasedbRoute_1 = require("./routes/firebasedbRoute");
-const apiRoute_1 = require("./routes/apiRoute");
+const index_route_1 = require("./routes/index.route");
+const gcloud_route_1 = require("./routes/gcloud.route");
+const firebasedb_route_1 = require("./routes/firebasedb.route");
+const api_route_1 = require("./routes/api.route");
 class Server {
     static bootstrap() {
         return new Server();
@@ -43,10 +43,10 @@ class Server {
     routes() {
         let router;
         router = express.Router();
-        indexRoute_1.IndexRoute.create(router);
-        apiRoute_1.APIRoute.create(router);
-        gcloudRoute_1.GCloudRoute.create(router);
-        firebasedbRoute_1.FirebaseDBRoute.create(router);
+        index_route_1.IndexRoute.create(router);
+        api_route_1.APIRoute.create(router);
+        gcloud_route_1.GCloudRoute.create(router);
+        firebasedb_route_1.FirebaseDBRoute.create(router);
         this.app.use(router);
     }
 }

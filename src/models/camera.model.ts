@@ -1,4 +1,4 @@
-import { GCloud, uploadFile } from './gcloudModel'
+import { GCloud, uploadFile } from './gcloud.model'
 import * as fs from 'fs.extra';
 import * as moment from 'moment';
 

@@ -4,10 +4,10 @@ class GCloud {
     constructor() {
         this.config = {
             projectId: 'prj300-its',
-            keyFilename: './config/auth/PRJ300-fb7cecf49aca.json'
+            keyFilename: './config/auth/projectawesomebox-firebase-adminsdk-g696q-10b4b10427.json'
         };
         this.storage = require('@google-cloud/storage')(this.config);
-        this.bucketName = 'prj300-its.appspot.com';
+        this.bucketName = 'gs://projectawesomebox.appspot.com';
         this.upload_file = function (fileName) {
             var filename = './public/uploads/' + fileName;
             this.storage

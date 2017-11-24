@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const gcloudModel_1 = require("./gcloudModel");
+const gcloud_model_1 = require("./gcloud.model");
 const fs = require("fs.extra");
 const moment = require("moment");
 let now = moment();
@@ -21,8 +21,8 @@ class Camera {
                 fs.move('capture.jpg', './public/uploads/' + fileName, function (err) {
                     if (err)
                         throw err;
-                    let gCloud = new gcloudModel_1.GCloud();
-                    gcloudModel_1.uploadFile(gCloud, fileName);
+                    let gCloud = new gcloud_model_1.GCloud();
+                    gcloud_model_1.uploadFile(gCloud, fileName);
                 });
                 console.log(`Capture image exited with code: ${code}`);
             });

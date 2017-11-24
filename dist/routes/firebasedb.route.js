@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const firebasedbModel_1 = require("../models/firebasedbModel");
 const route_1 = require("./route");
-let firebaseDB = new firebasedbModel_1.FirebaseDB();
+const firebasedb_model_1 = require("../models/firebasedb.model");
+let firebaseDB = new firebasedb_model_1.FirebaseDB();
 class FirebaseDBRoute extends route_1.BaseRoute {
     static create(router) {
         console.log("Creating firebase routes.");
@@ -11,15 +11,15 @@ class FirebaseDBRoute extends route_1.BaseRoute {
         });
         router.post("/Firebase/test", (req, res, next) => {
             console.log('TESTING FIREBASE: ');
-            firebasedbModel_1.testFirebaseDB(firebaseDB);
+            firebasedb_model_1.testFirebaseDB(firebaseDB);
         });
         router.get("/Firebase/UploadPhoto", (req, res, next) => {
             console.log('UPLOAD PHOTO DETAILS: ');
-            firebasedbModel_1.uploadPhotoDetails(firebaseDB);
+            firebasedb_model_1.uploadPhotoDetails(firebaseDB);
         });
         router.get("/Firebase/UploadTestData", (req, res, next) => {
             console.log('UPLOAD TEST DATA: ');
-            firebasedbModel_1.uploadTestData(firebaseDB);
+            firebasedb_model_1.uploadTestData(firebaseDB);
         });
     }
     constructor() {

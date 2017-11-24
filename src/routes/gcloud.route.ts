@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { BaseRoute } from "./route";
-import { bucketListFiles, downloadFile, GCloud, getFileMetaData, uploadFile } from '../models/gcloudModel';
+import { bucketListFiles, downloadFile, GCloud, getFileMetaData, uploadFile } from '../models/gcloud.model';
 
 let gCloud = new GCloud();
 

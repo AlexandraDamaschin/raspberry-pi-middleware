@@ -1,6 +1,6 @@
-import { API } from "../models/apiModel";
 import { BaseRoute } from "./route";
 import { Router, Request, Response, NextFunction } from "express";
+import { API } from "../models/api.model";
 
 let api = new API();
 
