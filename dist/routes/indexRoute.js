@@ -5,7 +5,7 @@ const cameraModel_1 = require("../models/cameraModel");
 let camera = new cameraModel_1.Camera();
 class IndexRoute extends route_1.BaseRoute {
     static create(router) {
-        console.log("[IndexRoute::create] Creating index route.");
+        console.log("Creating index route.");
         router.get("/", (req, res, next) => {
             new IndexRoute().index(req, res, next);
         });

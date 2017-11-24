@@ -9,6 +9,8 @@ const errorHandler = require("errorhandler");
 const methodOverride = require("method-override");
 const indexRoute_1 = require("./routes/indexRoute");
 const gcloudRoute_1 = require("./routes/gcloudRoute");
+const firebasedbRoute_1 = require("./routes/firebasedbRoute");
+const apiRoute_1 = require("./routes/apiRoute");
 class Server {
     static bootstrap() {
         return new Server();
@@ -42,7 +44,9 @@ class Server {
         let router;
         router = express.Router();
         indexRoute_1.IndexRoute.create(router);
+        apiRoute_1.APIRoute.create(router);
         gcloudRoute_1.GCloudRoute.create(router);
+        firebasedbRoute_1.FirebaseDBRoute.create(router);
         this.app.use(router);
     }
 }
