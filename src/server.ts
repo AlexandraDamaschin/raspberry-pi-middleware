@@ -8,7 +8,7 @@ import errorHandler = require("errorhandler");
 import methodOverride = require("method-override");
 import { IndexRoute } from "./routes/indexRoute";
 import { GCloudRoute } from "./routes/gcloudRoute";
-import { FirebaseDBRoute } from "./routes/firebaseRoute";
+import { FirebaseDBRoute } from "./routes/firebasedbRoute";
 
 export class Server {
   public app: express.Application;

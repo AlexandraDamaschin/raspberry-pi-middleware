@@ -1,4 +1,4 @@
-import { FirebaseDB } from "../models/firebaseModel";
+import { FirebaseDB, testFirebaseDB, uploadPhotoDetails } from "../models/firebasedbModel";
 import { BaseRoute } from "./route";
 import { NextFunction, Request, Response, Router } from "express";
 
@@ -8,10 +8,21 @@ export class FirebaseDBRoute extends BaseRoute {
     public static create(router: Router) {
 
         console.log("[FirebaseRoute::create] Creating firebase route.");
-        //add gcloud page route
+
         router.get("/Firebase", (req: Request, res: Response, next: NextFunction) => {
             new FirebaseDBRoute().firebaseDB(req, res, next);
         });
+
+        router.get("/Firebase/test", (req: Request, res: Response, next: NextFunction) => {
+            console.log('TESTING FIREBASE: ')
+            testFirebaseDB(firebaseDB);
+          });
+
+          router.get("/Firebase/UploadPhoto", (req: Request, res: Response, next: NextFunction) => {
+            console.log('UPLOAD PHOTO DETAILS: ')
+            uploadPhotoDetails(firebaseDB);
+          });
+
     }
 
     constructor() {
@@ -23,7 +34,6 @@ export class FirebaseDBRoute extends BaseRoute {
         let options: Object = {
             "message": "Firebase"
         };
-
         this.render(req, res, "index", options);
     }
 }
