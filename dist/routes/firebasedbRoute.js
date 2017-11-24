@@ -5,11 +5,11 @@ const route_1 = require("./route");
 let firebaseDB = new firebasedbModel_1.FirebaseDB();
 class FirebaseDBRoute extends route_1.BaseRoute {
     static create(router) {
-        console.log("[FirebaseRoute::create] Creating firebase route.");
+        console.log("Creating firebase routes.");
         router.get("/Firebase", (req, res, next) => {
             new FirebaseDBRoute().firebaseDB(req, res, next);
         });
-        router.get("/Firebase/test", (req, res, next) => {
+        router.post("/Firebase/test", (req, res, next) => {
             console.log('TESTING FIREBASE: ');
             firebasedbModel_1.testFirebaseDB(firebaseDB);
         });

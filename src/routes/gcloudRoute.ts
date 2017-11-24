@@ -7,7 +7,7 @@ let gCloud = new GCloud();
 export class GCloudRoute extends BaseRoute {
     public static create(router: Router) {
 
-    console.log("[GCloudRoute::create] Creating google cloud route.");
+    console.log("Creating google cloud routes.");
 
     //add gcloud page route
     router.get("/gCloud", (req: Request, res: Response, next: NextFunction) => {

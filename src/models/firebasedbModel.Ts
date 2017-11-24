@@ -8,14 +8,19 @@ admin.initializeApp({
 
 var db = admin.database();
 var capturedPhotosRef = db.ref("capturedPhotos");
-capturedPhotosRef.once("value", function (snapshot) {
-    console.log(snapshot.val());
-});
+
 
 export class FirebaseDB {
     public testFirebase() {
-        console.log('testing firebase');
+        console.log('TESTING FIREBASE:');
+        
+        capturedPhotosRef.once("value", function (snapshot) {
+            console.log('Captured Photos Reference Snapshot:')
+            console.log(snapshot.val());
+        });
+
         var newPhotoKey = capturedPhotosRef.push().key;
+        console.log('Captured Photos New Key:')
         console.log(newPhotoKey);
     }
 

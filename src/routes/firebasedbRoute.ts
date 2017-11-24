@@ -7,26 +7,26 @@ let firebaseDB = new FirebaseDB();
 export class FirebaseDBRoute extends BaseRoute {
     public static create(router: Router) {
 
-        console.log("[FirebaseRoute::create] Creating firebase route.");
+        console.log("Creating firebase routes.");
 
         router.get("/Firebase", (req: Request, res: Response, next: NextFunction) => {
             new FirebaseDBRoute().firebaseDB(req, res, next);
         });
 
-        router.get("/Firebase/test", (req: Request, res: Response, next: NextFunction) => {
+        router.post("/Firebase/test", (req: Request, res: Response, next: NextFunction) => {
             console.log('TESTING FIREBASE: ')
             testFirebaseDB(firebaseDB);
-          });
+        });
 
-          router.get("/Firebase/UploadPhoto", (req: Request, res: Response, next: NextFunction) => {
+        router.get("/Firebase/UploadPhoto", (req: Request, res: Response, next: NextFunction) => {
             console.log('UPLOAD PHOTO DETAILS: ')
             uploadPhotoDetails(firebaseDB);
-          });
+        });
 
-          router.get("/Firebase/UploadTestData", (req: Request, res: Response, next: NextFunction) => {
+        router.get("/Firebase/UploadTestData", (req: Request, res: Response, next: NextFunction) => {
             console.log('UPLOAD TEST DATA: ')
             uploadTestData(firebaseDB);
-          });
+        });
 
     }
 

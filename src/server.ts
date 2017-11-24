@@ -9,6 +9,7 @@ import methodOverride = require("method-override");
 import { IndexRoute } from "./routes/indexRoute";
 import { GCloudRoute } from "./routes/gcloudRoute";
 import { FirebaseDBRoute } from "./routes/firebasedbRoute";
+import { APIRoute } from "./routes/apiRoute";
 
 export class Server {
   public app: express.Application;
@@ -75,6 +76,7 @@ export class Server {
   
     //IndexRoute
     IndexRoute.create(router);
+    APIRoute.create(router);
     GCloudRoute.create(router);
     FirebaseDBRoute.create(router);
     
