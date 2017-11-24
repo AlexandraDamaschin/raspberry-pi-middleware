@@ -1,10 +1,10 @@
 export class GCloud {
   private config = {
     projectId: 'prj300-its',
-    keyFilename: './config/auth/PRJ300-fb7cecf49aca.json'
+    keyFilename: './config/auth/projectawesomebox-firebase-adminsdk-g696q-10b4b10427.json'
   };
   private storage = require('@google-cloud/storage')(this.config);
-  private bucketName = 'prj300-its.appspot.com';
+  private bucketName = 'gs://projectawesomebox.appspot.com';
 
   public bucketListFiles() {
     this.storage
