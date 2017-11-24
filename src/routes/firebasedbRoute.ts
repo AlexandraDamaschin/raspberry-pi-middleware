@@ -1,4 +1,4 @@
-import { FirebaseDB, testFirebaseDB, uploadPhotoDetails } from "../models/firebasedbModel";
+import { FirebaseDB, testFirebaseDB, uploadPhotoDetails, uploadTestData } from "../models/firebasedbModel";
 import { BaseRoute } from "./route";
 import { NextFunction, Request, Response, Router } from "express";
 
@@ -21,6 +21,11 @@ export class FirebaseDBRoute extends BaseRoute {
           router.get("/Firebase/UploadPhoto", (req: Request, res: Response, next: NextFunction) => {
             console.log('UPLOAD PHOTO DETAILS: ')
             uploadPhotoDetails(firebaseDB);
+          });
+
+          router.get("/Firebase/UploadTestData", (req: Request, res: Response, next: NextFunction) => {
+            console.log('UPLOAD TEST DATA: ')
+            uploadTestData(firebaseDB);
           });
 
     }

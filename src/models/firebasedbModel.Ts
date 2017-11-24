@@ -1,54 +1,53 @@
-// var firebase = require('firebase/app');
-// require("firebase/auth");
-// require("firebase/database");
+var admin = require("firebase-admin");
+var serviceAccount = require("../../config/auth/projectawesomebox-firebase-adminsdk-g696q-10b4b10427.json");
 
-// This import loads the firebase namespace along with all its type information.
-// import * as firebase from 'firebase/app';
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://projectawesomebox.firebaseio.com"
+});
 
-// // These imports load individual services into the firebase namespace.
-// import 'firebase/auth';
-// import 'firebase/database';
+var db = admin.database();
+var capturedPhotosRef = db.ref("capturedPhotos");
+capturedPhotosRef.once("value", function (snapshot) {
+    console.log(snapshot.val());
+});
 
+export class FirebaseDB {
+    public testFirebase() {
+        console.log('testing firebase');
+        var newPhotoKey = capturedPhotosRef.push().key;
+        console.log(newPhotoKey);
+    }
 
-    var firebase = require('firebase/app');
-    require("firebase/auth");
-    require("firebase/database");
-    
-    var config = {
-        apiKey: "AIzaSyDKmE_WcefpzVY_8MiPrqbDMrZ8B5BIk14",
-        authDomain: "prj300-its.firebaseapp.com",
-        databaseURL: "https://prj300-its.firebaseio.com",
-        projectId: "prj300-its",
-        storageBucket: "prj300-its.appspot.com",
-        messagingSenderId: "748934382727"
+    public uploadTestData() {
+        try {
+            capturedPhotosRef.set({
+                test01: {
+                    filename: "filename-test01",
+                    downloadUrl: "downloadUrl-test01"
+                },
+                test02: {
+                    filename: "filename-test02",
+                    downloadUrl: "downloadUrl-test02"
+                }
+            });
+        }
+        catch (e) {
+            if (console.log(e)) {
+            }
+        }
     };
-    var firebase = (firebase.initializeApp(config));
-    var database = firebase.database();
-
-   export class FirebaseDB {
-       public uploadPhotoDetails (filename, downloadUrl) { 
-        var photoDetails = { 
-            filename: filename, 
-            downloadUrl: downloadUrl 
-        }; 
-        var newPhotoKey = database.ref('images').push().key; 
-        console.log(newPhotoKey); 
-        var updates = {}; 
-        updates['/images/' + newPhotoKey] = photoDetails; 
- 
-        return database.ref().update(updates); 
-    };
-
-    public testFirebase () { 
-       console.log('testing firebase');
-    };
-   }
+};
 
 
-export function testFirebaseDB(c: FirebaseDB) {
+export function uploadPhotoDetails(c: FirebaseDB) {
     c.testFirebase()
 }
 
-export function uploadPhotoDetails(c: FirebaseDB) {
-    c.uploadPhotoDetails('TestFilename', 'TestDownloadUrl')
+export function uploadTestData(c: FirebaseDB) {
+    c.uploadTestData()
+}
+
+export function testFirebaseDB(c: FirebaseDB) {
+    c.testFirebase()
 }

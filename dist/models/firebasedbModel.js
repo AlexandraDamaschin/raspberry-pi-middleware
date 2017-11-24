@@ -1,42 +1,53 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var firebase = require('firebase/app');
-require("firebase/auth");
-require("firebase/database");
-var config = {
-    apiKey: "AIzaSyDKmE_WcefpzVY_8MiPrqbDMrZ8B5BIk14",
-    authDomain: "prj300-its.firebaseapp.com",
-    databaseURL: "https://prj300-its.firebaseio.com",
-    projectId: "prj300-its",
-    storageBucket: "prj300-its.appspot.com",
-    messagingSenderId: "748934382727"
-};
-var firebase = (firebase.initializeApp(config));
-var database = firebase.database();
+var admin = require("firebase-admin");
+var serviceAccount = require("../../config/auth/projectawesomebox-firebase-adminsdk-g696q-10b4b10427.json");
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://projectawesomebox.firebaseio.com"
+});
+var db = admin.database();
+var capturedPhotosRef = db.ref("capturedPhotos");
+capturedPhotosRef.once("value", function (snapshot) {
+    console.log(snapshot.val());
+});
 class FirebaseDB {
-    uploadPhotoDetails(filename, downloadUrl) {
-        var photoDetails = {
-            filename: filename,
-            downloadUrl: downloadUrl
-        };
-        var newPhotoKey = database.ref('images').push().key;
-        console.log(newPhotoKey);
-        var updates = {};
-        updates['/images/' + newPhotoKey] = photoDetails;
-        return database.ref().update(updates);
-    }
-    ;
     testFirebase() {
         console.log('testing firebase');
+        var newPhotoKey = capturedPhotosRef.push().key;
+        console.log(newPhotoKey);
+    }
+    uploadTestData() {
+        try {
+            capturedPhotosRef.set({
+                test01: {
+                    filename: "filename-test01",
+                    downloadUrl: "downloadUrl-test01"
+                },
+                test02: {
+                    filename: "filename-test02",
+                    downloadUrl: "downloadUrl-test02"
+                }
+            });
+        }
+        catch (e) {
+            if (console.log(e)) {
+            }
+        }
     }
     ;
 }
 exports.FirebaseDB = FirebaseDB;
+;
+function uploadPhotoDetails(c) {
+    c.testFirebase();
+}
+exports.uploadPhotoDetails = uploadPhotoDetails;
+function uploadTestData(c) {
+    c.uploadTestData();
+}
+exports.uploadTestData = uploadTestData;
 function testFirebaseDB(c) {
     c.testFirebase();
 }
 exports.testFirebaseDB = testFirebaseDB;
-function uploadPhotoDetails(c) {
-    c.uploadPhotoDetails('TestFilename', 'TestDownloadUrl');
-}
-exports.uploadPhotoDetails = uploadPhotoDetails;

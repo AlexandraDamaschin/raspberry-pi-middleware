@@ -17,6 +17,10 @@ class FirebaseDBRoute extends route_1.BaseRoute {
             console.log('UPLOAD PHOTO DETAILS: ');
             firebasedbModel_1.uploadPhotoDetails(firebaseDB);
         });
+        router.get("/Firebase/UploadTestData", (req, res, next) => {
+            console.log('UPLOAD TEST DATA: ');
+            firebasedbModel_1.uploadTestData(firebaseDB);
+        });
     }
     constructor() {
         super();
