@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { BaseRoute } from "./route";
-import { Camera, takeUploadFile } from "../models/camera.model"
+import { Camera, takeUploadFile, takePhoto } from "../models/camera.model"
 
 let camera = new Camera();
 
@@ -15,7 +15,7 @@ export class IndexRoute extends BaseRoute {
     });
 
     router.get("/camera", (req: Request, res: Response, next: NextFunction) => {
-      takeUploadFile(camera)
+      takePhoto(camera)
     });
 
   }

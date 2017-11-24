@@ -7,19 +7,36 @@ now.toISOString();
 let fileName = 'capture-' + now + '.jpg';
 
 export class Camera {
-    public take_upload_photo = function () {
 
+    public take_photo = function () {
         const { spawn } = require('child_process');
         const captureImage = spawn('raspistill', ['-w', '640', '-h', '480', '-vf', '-hf', '-o', 'capture.jpg']);
 
         captureImage.stdout.on('data', (data) => {
             console.log(`stdout: ${data}`);
         });
-
         captureImage.stderr.on('data', (data) => {
             console.log(`stderr: ${data}`);
         });
+        captureImage.on('close', (code) => {
+            fs.move('capture.jpg', './camera/' + fileName, function (err) {
+                if (err) throw err;
+                return fileName;
+            });
+            console.log(`Capture image exited with code: ${code}`)
+        });
+    }
 
+    public take_upload_photo = function () {
+        const { spawn } = require('child_process');
+        const captureImage = spawn('raspistill', ['-w', '640', '-h', '480', '-vf', '-hf', '-o', 'capture.jpg']);
+
+        captureImage.stdout.on('data', (data) => {
+            console.log(`stdout: ${data}`);
+        });
+        captureImage.stderr.on('data', (data) => {
+            console.log(`stderr: ${data}`);
+        });
         captureImage.on('close', (code) => {
             fs.move('capture.jpg', './public/uploads/' + fileName, function (err) {
                 if (err) throw err;
@@ -33,4 +50,8 @@ export class Camera {
 
 export function takeUploadFile(c: Camera) {
     c.take_upload_photo()
-  }
+}
+
+export function takePhoto(c: Camera) {
+    c.take_photo()
+}

@@ -10,7 +10,7 @@ class IndexRoute extends route_1.BaseRoute {
             new IndexRoute().index(req, res, next);
         });
         router.get("/camera", (req, res, next) => {
-            camera_model_1.takeUploadFile(camera);
+            camera_model_1.takePhoto(camera);
         });
     }
     constructor() {

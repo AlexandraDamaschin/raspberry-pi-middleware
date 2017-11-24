@@ -1,6 +1,6 @@
 import { BaseRoute } from "./route";
 import { Router, Request, Response, NextFunction } from "express";
-import { API } from "../models/api.model";
+import { API, captureAndUpload } from "../models/api.model";
 
 let api = new API();
 
@@ -11,6 +11,11 @@ export class APIRoute extends BaseRoute {
 
         router.get("/API", (req: Request, res: Response, next: NextFunction) => {
             new APIRoute().api(req, res, next);
+        });
+
+        router.get("/API/cau", (req: Request, res: Response, next: NextFunction) => {
+            console.log('Capture and Upload')
+            captureAndUpload();
         });
 
     }

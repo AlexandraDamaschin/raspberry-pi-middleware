@@ -9,6 +9,10 @@ class APIRoute extends route_1.BaseRoute {
         router.get("/API", (req, res, next) => {
             new APIRoute().api(req, res, next);
         });
+        router.get("/API/cau", (req, res, next) => {
+            console.log('Capture and Upload');
+            api_model_1.captureAndUpload();
+        });
     }
     constructor() {
         super();

@@ -8,6 +8,24 @@ now.toISOString();
 let fileName = 'capture-' + now + '.jpg';
 class Camera {
     constructor() {
+        this.take_photo = function () {
+            const { spawn } = require('child_process');
+            const captureImage = spawn('raspistill', ['-w', '640', '-h', '480', '-vf', '-hf', '-o', 'capture.jpg']);
+            captureImage.stdout.on('data', (data) => {
+                console.log(`stdout: ${data}`);
+            });
+            captureImage.stderr.on('data', (data) => {
+                console.log(`stderr: ${data}`);
+            });
+            captureImage.on('close', (code) => {
+                fs.move('capture.jpg', './camera/' + fileName, function (err) {
+                    if (err)
+                        throw err;
+                    return fileName;
+                });
+                console.log(`Capture image exited with code: ${code}`);
+            });
+        };
         this.take_upload_photo = function () {
             const { spawn } = require('child_process');
             const captureImage = spawn('raspistill', ['-w', '640', '-h', '480', '-vf', '-hf', '-o', 'capture.jpg']);
@@ -34,3 +52,7 @@ function takeUploadFile(c) {
     c.take_upload_photo();
 }
 exports.takeUploadFile = takeUploadFile;
+function takePhoto(c) {
+    c.take_photo();
+}
+exports.takePhoto = takePhoto;
