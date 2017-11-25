@@ -1,23 +1,23 @@
 export class GCloud {
   private config = {
-    projectId: 'projectawesomebox',
-    keyFilename: './config/auth/projectawesomebox-53c5729e1b15.json'
+    projectId: 'project300awesomedatabase',
+    keyFilename: './config/auth/project300awesomedatabase-0ab923a65487.json'
   };
   private storage = require('@google-cloud/storage')(this.config);
-  private bucketName = 'gs://projectawesomebox.appspot.com/';
+  private bucketName = 'project300awesomedatabase.appspot.com';
 
-  public create_bucket(){
-    const bucketName = 'my-new-bucket';
+  // public create_bucket(){
+  //   const bucketName = 'my-new-bucket';
 
-    this.storage
-      .createBucket(bucketName)
-      .then(() => {
-        console.log(`Bucket ${bucketName} created.`);
-      })
-      .catch(err => {
-        console.error('ERROR:', err);
-      });
-  }
+  //   this.storage
+  //     .createBucket(bucketName)
+  //     .then(() => {
+  //       console.log(`Bucket ${bucketName} created.`);
+  //     })
+  //     .catch(err => {
+  //       console.error('ERROR:', err);
+  //     });
+  // }
 
   public test_gCloud() {
     this.storage
@@ -143,6 +143,69 @@ export function downloadFile(c: GCloud, fileName) {
 
 
 export function testGCloud(c: GCloud) {
- // c.test_gCloud();
- c.getMetadata("capture-1511606668308.jpg");
+  // c.test_gCloud();
+  c.getMetadata("capture-1511606668308.jpg");
+}
+
+
+export function anotherTest() {
+
+  // Imports the Google Cloud client library
+  const Storage = require('@google-cloud/storage');
+
+
+  // Instantiates a client
+  const storage = Storage({
+    projectId: 'project300awesomedatabase',
+    keyFilename: './config/auth/project300awesomedatabase-7cdd21c641ed.json'
+  });
+
+
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  const bucketName = 'gs://project300awesomedatabase.appspot.com';
+  const filename = './camera/capture-1511614424637.jpg';
+
+
+  // Uploads a local file to the bucket
+  storage
+    .bucket(bucketName)
+    .upload(filename)
+    .then(() => {
+      console.log(`${filename} uploaded to ${bucketName}.`);
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+
+}
+
+
+export function anothergcloudtest() {
+  // [START storage_list_buckets]
+  // Imports the Google Cloud client library
+  const Storage = require('@google-cloud/storage');
+
+  const storage = Storage({
+    projectId: 'project300awesomedatabase',
+    keyFilename: './config/auth/project300awesomedatabase-7cdd21c641ed.json'
+  });
+
+  // Lists all buckets in the current project
+  storage
+    .getBuckets()
+    .then(results => {
+      const buckets = results[0];
+
+      console.log('Buckets:');
+      buckets.forEach(bucket => {
+        console.log(bucket.name);
+      });
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END storage_list_buckets]
 }

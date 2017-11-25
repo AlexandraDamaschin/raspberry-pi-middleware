@@ -3,11 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class GCloud {
     constructor() {
         this.config = {
-            projectId: 'projectawesomebox',
-            keyFilename: './config/auth/projectawesomebox-53c5729e1b15.json'
+            projectId: 'project300awesomedatabase',
+            keyFilename: './config/auth/project300awesomedatabase-0ab923a65487.json'
         };
         this.storage = require('@google-cloud/storage')(this.config);
-        this.bucketName = 'gs://projectawesomebox.appspot.com/';
+        this.bucketName = 'project300awesomedatabase.appspot.com';
         this.upload_file = function (fileName) {
             var filename = './camera/' + fileName;
             this.storage
@@ -37,17 +37,6 @@ class GCloud {
                 console.error('ERROR:', err);
             });
         };
-    }
-    create_bucket() {
-        const bucketName = 'my-new-bucket';
-        this.storage
-            .createBucket(bucketName)
-            .then(() => {
-            console.log(`Bucket ${bucketName} created.`);
-        })
-            .catch(err => {
-            console.error('ERROR:', err);
-        });
     }
     test_gCloud() {
         this.storage
@@ -134,3 +123,42 @@ function testGCloud(c) {
     c.getMetadata("capture-1511606668308.jpg");
 }
 exports.testGCloud = testGCloud;
+function anotherTest() {
+    const Storage = require('@google-cloud/storage');
+    const storage = Storage({
+        projectId: 'project300awesomedatabase',
+        keyFilename: './config/auth/project300awesomedatabase-7cdd21c641ed.json'
+    });
+    const bucketName = 'gs://project300awesomedatabase.appspot.com';
+    const filename = './camera/capture-1511614424637.jpg';
+    storage
+        .bucket(bucketName)
+        .upload(filename)
+        .then(() => {
+        console.log(`${filename} uploaded to ${bucketName}.`);
+    })
+        .catch(err => {
+        console.error('ERROR:', err);
+    });
+}
+exports.anotherTest = anotherTest;
+function anothergcloudtest() {
+    const Storage = require('@google-cloud/storage');
+    const storage = Storage({
+        projectId: 'project300awesomedatabase',
+        keyFilename: './config/auth/project300awesomedatabase-7cdd21c641ed.json'
+    });
+    storage
+        .getBuckets()
+        .then(results => {
+        const buckets = results[0];
+        console.log('Buckets:');
+        buckets.forEach(bucket => {
+            console.log(bucket.name);
+        });
+    })
+        .catch(err => {
+        console.error('ERROR:', err);
+    });
+}
+exports.anothergcloudtest = anothergcloudtest;
