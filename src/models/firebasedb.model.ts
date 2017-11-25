@@ -13,7 +13,7 @@ var capturedPhotosRef = db.ref("capturedPhotos");
 export class FirebaseDB {
     public testFirebase() {
         console.log('TESTING FIREBASE:');
-        
+
         capturedPhotosRef.once("value", function (snapshot) {
             console.log('Captured Photos Reference Snapshot:')
             console.log(snapshot.val());
@@ -24,7 +24,26 @@ export class FirebaseDB {
         console.log(newPhotoKey);
     }
 
+    public uploadPhotoDetails(filename, email) {
+        var newPhotoKey = capturedPhotosRef.push().key;
+        try {
+            capturedPhotosRef.push({
+                [newPhotoKey]: {
+                    filename: filename,
+                    storagelocation: "gs://projectawesomebox.appspot.com/photos/" + [filename],
+                    useremail: email,
+                }
+            });
+        }
+        catch (e) {
+            if (console.log(e)) {
+            }
+        }
+    }
+
     public uploadTestData() {
+
+
         try {
             capturedPhotosRef.set({
                 test01: {
@@ -46,7 +65,8 @@ export class FirebaseDB {
 
 
 export function uploadPhotoDetails(c: FirebaseDB) {
-    c.testFirebase()
+    c.uploadPhotoDetails("capture-1511606668308.jpg", "test@email.com"),
+    c.uploadPhotoDetails("capture-1511614424637.jpg", "test@email.com")
 }
 
 export function uploadTestData(c: FirebaseDB) {

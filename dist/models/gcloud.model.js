@@ -4,10 +4,10 @@ class GCloud {
     constructor() {
         this.config = {
             projectId: 'projectawesomebox',
-            keyFilename: './config/auth/projectawesomebox-firebase-adminsdk-g696q-10b4b10427.json'
+            keyFilename: './config/auth/projectawesomebox-53c5729e1b15.json'
         };
         this.storage = require('@google-cloud/storage')(this.config);
-        this.bucketName = 'gs://projectawesomebox.appspot.com/photos';
+        this.bucketName = 'gs://projectawesomebox.appspot.com/';
         this.upload_file = function (fileName) {
             var filename = './camera/' + fileName;
             this.storage
@@ -37,6 +37,32 @@ class GCloud {
                 console.error('ERROR:', err);
             });
         };
+    }
+    create_bucket() {
+        const bucketName = 'my-new-bucket';
+        this.storage
+            .createBucket(bucketName)
+            .then(() => {
+            console.log(`Bucket ${bucketName} created.`);
+        })
+            .catch(err => {
+            console.error('ERROR:', err);
+        });
+    }
+    test_gCloud() {
+        this.storage
+            .bucket(this.bucketName)
+            .getFiles()
+            .then(results => {
+            const files = results[0];
+            console.log('Files:');
+            files.forEach(file => {
+                console.log(file.name);
+            });
+        })
+            .catch(err => {
+            console.error('ERROR:', err);
+        });
     }
     bucketListFiles() {
         this.storage
@@ -104,3 +130,7 @@ function downloadFile(c, fileName) {
     c.download_file(fileName);
 }
 exports.downloadFile = downloadFile;
+function testGCloud(c) {
+    c.getMetadata("capture-1511606668308.jpg");
+}
+exports.testGCloud = testGCloud;

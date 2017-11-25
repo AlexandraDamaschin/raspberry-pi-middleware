@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { BaseRoute } from "./route";
-import { bucketListFiles, downloadFile, GCloud, getFileMetaData, uploadFile } from '../models/gcloud.model';
+import { bucketListFiles, downloadFile, GCloud, getFileMetaData, uploadFile, testGCloud } from '../models/gcloud.model';
 
 let gCloud = new GCloud();
 
@@ -12,6 +12,11 @@ export class GCloudRoute extends BaseRoute {
     //add gcloud page route
     router.get("/gCloud", (req: Request, res: Response, next: NextFunction) => {
       new GCloudRoute().gcloud(req, res, next);
+    });
+
+    router.get("/gCloud/test", (req: Request, res: Response, next: NextFunction) => {
+      console.log('testgcloud called....');
+      testGCloud(gCloud);
     });
 
     router.get("/gCloud/bucketlist", (req: Request, res: Response, next: NextFunction) => {

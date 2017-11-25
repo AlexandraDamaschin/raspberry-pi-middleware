@@ -10,7 +10,7 @@ function captureAndUpload() {
     let photo = camera.take_photo();
     console.log('----------captured-----------');
     let storage = new gcloud_model_1.GCloud();
-    storage.upload_file('capture-1511606668308.jpg');
+    storage.upload_file('capture-1511613469721.jpg');
     console.log('----------uploaded-----------');
 }
 exports.captureAndUpload = captureAndUpload;

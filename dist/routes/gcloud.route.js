@@ -9,6 +9,10 @@ class GCloudRoute extends route_1.BaseRoute {
         router.get("/gCloud", (req, res, next) => {
             new GCloudRoute().gcloud(req, res, next);
         });
+        router.get("/gCloud/test", (req, res, next) => {
+            console.log('testgcloud called....');
+            gcloud_model_1.testGCloud(gCloud);
+        });
         router.get("/gCloud/bucketlist", (req, res, next) => {
             console.log('BUCKET LIST: ');
             gcloud_model_1.bucketListFiles(gCloud);

@@ -19,7 +19,7 @@ export function captureAndUpload () {
     console.log('----------captured-----------'); 
 
     let storage = new GCloud();
-    storage.upload_file('capture-1511606668308.jpg');
+    storage.upload_file('capture-1511613469721.jpg');
 
     
     console.log('----------uploaded-----------');  

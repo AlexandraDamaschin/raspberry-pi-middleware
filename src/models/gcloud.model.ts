@@ -1,10 +1,39 @@
 export class GCloud {
   private config = {
     projectId: 'projectawesomebox',
-    keyFilename: './config/auth/projectawesomebox-firebase-adminsdk-g696q-10b4b10427.json'
+    keyFilename: './config/auth/projectawesomebox-53c5729e1b15.json'
   };
   private storage = require('@google-cloud/storage')(this.config);
-  private bucketName = 'gs://projectawesomebox.appspot.com/photos';
+  private bucketName = 'gs://projectawesomebox.appspot.com/';
+
+  public create_bucket(){
+    const bucketName = 'my-new-bucket';
+
+    this.storage
+      .createBucket(bucketName)
+      .then(() => {
+        console.log(`Bucket ${bucketName} created.`);
+      })
+      .catch(err => {
+        console.error('ERROR:', err);
+      });
+  }
+
+  public test_gCloud() {
+    this.storage
+      .bucket(this.bucketName)
+      .getFiles()
+      .then(results => {
+        const files = results[0];
+        console.log('Files:');
+        files.forEach(file => {
+          console.log(file.name);
+        });
+      })
+      .catch(err => {
+        console.error('ERROR:', err);
+      });
+  }
 
   public bucketListFiles() {
     this.storage
@@ -57,7 +86,7 @@ export class GCloud {
   }
 
   public upload_file = function (fileName) {
-    var filename = './camera/'+fileName;
+    var filename = './camera/' + fileName;
     this.storage
       .bucket(this.bucketName)
       .upload(filename)
@@ -72,10 +101,10 @@ export class GCloud {
 
   public download_file = function (fileName) {
     const srcFilename = fileName;
-    const destFilename = './public/downloads/'+srcFilename ;
+    const destFilename = './public/downloads/' + srcFilename;
     const options = {
-                      destination: destFilename,
-                    };
+      destination: destFilename,
+    };
     this.storage
       .bucket(this.bucketName)
       .file(srcFilename)
@@ -110,4 +139,10 @@ export function uploadFile(c: GCloud, fileName) {
 //  Download File
 export function downloadFile(c: GCloud, fileName) {
   c.download_file(fileName);
+}
+
+
+export function testGCloud(c: GCloud) {
+ // c.test_gCloud();
+ c.getMetadata("capture-1511606668308.jpg");
 }
