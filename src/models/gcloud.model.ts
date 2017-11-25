@@ -1,10 +1,10 @@
 export class GCloud {
   private config = {
-    projectId: 'prj300-its',
+    projectId: 'projectawesomebox',
     keyFilename: './config/auth/projectawesomebox-firebase-adminsdk-g696q-10b4b10427.json'
   };
   private storage = require('@google-cloud/storage')(this.config);
-  private bucketName = 'gs://projectawesomebox.appspot.com';
+  private bucketName = 'gs://projectawesomebox.appspot.com/photos';
 
   public bucketListFiles() {
     this.storage
@@ -57,7 +57,7 @@ export class GCloud {
   }
 
   public upload_file = function (fileName) {
-    var filename = './public/uploads/'+fileName;
+    var filename = './camera/'+fileName;
     this.storage
       .bucket(this.bucketName)
       .upload(filename)

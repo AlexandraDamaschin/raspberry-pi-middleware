@@ -8,7 +8,9 @@ exports.API = API;
 function captureAndUpload() {
     let camera = new camera_model_1.Camera();
     let photo = camera.take_photo();
-    console.log(photo);
+    console.log('----------captured-----------');
     let storage = new gcloud_model_1.GCloud();
+    storage.upload_file('capture-1511606668308.jpg');
+    console.log('----------uploaded-----------');
 }
 exports.captureAndUpload = captureAndUpload;

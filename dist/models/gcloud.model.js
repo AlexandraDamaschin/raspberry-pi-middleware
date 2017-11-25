@@ -3,13 +3,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class GCloud {
     constructor() {
         this.config = {
-            projectId: 'prj300-its',
+            projectId: 'projectawesomebox',
             keyFilename: './config/auth/projectawesomebox-firebase-adminsdk-g696q-10b4b10427.json'
         };
         this.storage = require('@google-cloud/storage')(this.config);
-        this.bucketName = 'gs://projectawesomebox.appspot.com';
+        this.bucketName = 'gs://projectawesomebox.appspot.com/photos';
         this.upload_file = function (fileName) {
-            var filename = './public/uploads/' + fileName;
+            var filename = './camera/' + fileName;
             this.storage
                 .bucket(this.bucketName)
                 .upload(filename)
