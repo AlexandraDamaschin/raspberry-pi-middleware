@@ -181,9 +181,34 @@ export function anotherTest() {
     });
 
 }
-
-
 export function anothergcloudtest() {
+  // [START storage_list_buckets]
+  // Imports the Google Cloud client library
+  const Storage = require('@google-cloud/storage');
+
+  const storage = Storage({
+    projectId: 'project300awesomedatabase',
+    keyFilename: './config/auth/project300awesomedatabase-7cdd21c641ed.json'
+  });
+
+  // Lists all buckets in the current project
+  storage
+    .getBuckets()
+    .then(results => {
+      const buckets = results[0];
+
+      console.log('Buckets:');
+      buckets.forEach(bucket => {
+        console.log(bucket.name);
+      });
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+  // [END storage_list_buckets]
+}
+
+export function testgCloudConnection() {
   // [START storage_list_buckets]
   // Imports the Google Cloud client library
   const Storage = require('@google-cloud/storage');

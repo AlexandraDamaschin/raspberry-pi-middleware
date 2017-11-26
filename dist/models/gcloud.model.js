@@ -162,3 +162,23 @@ function anothergcloudtest() {
     });
 }
 exports.anothergcloudtest = anothergcloudtest;
+function testgCloudConnection() {
+    const Storage = require('@google-cloud/storage');
+    const storage = Storage({
+        projectId: 'project300awesomedatabase',
+        keyFilename: './config/auth/project300awesomedatabase-7cdd21c641ed.json'
+    });
+    storage
+        .getBuckets()
+        .then(results => {
+        const buckets = results[0];
+        console.log('Buckets:');
+        buckets.forEach(bucket => {
+            console.log(bucket.name);
+        });
+    })
+        .catch(err => {
+        console.error('ERROR:', err);
+    });
+}
+exports.testgCloudConnection = testgCloudConnection;
