@@ -1,16 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const gcloud_model_1 = require("./gcloud.model");
-const camera_model_1 = require("./camera.model");
+const firebasedb_model_1 = require("./firebasedb.model");
 class API {
 }
 exports.API = API;
 function captureAndUpload() {
-    let camera = new camera_model_1.Camera();
-    let photo = camera.take_photo();
-    console.log('----------captured-----------');
+    let database = new firebasedb_model_1.FirebaseDB();
     let storage = new gcloud_model_1.GCloud();
-    storage.upload_file('capture-1511613469721.jpg');
-    console.log('----------uploaded-----------');
+    storage.upload_file('test-file.jpg');
+    database.uploadPhotoDetails('test-file.jpg', 'test@test.com');
 }
 exports.captureAndUpload = captureAndUpload;

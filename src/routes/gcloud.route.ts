@@ -6,6 +6,7 @@ import {
     bucketListFiles,
     downloadFile,
     GCloud,
+    GetBuckets,
     getFileMetaData,
     testGCloud,
     testgCloudConnection,
@@ -14,6 +15,7 @@ import {
 
 let gCloud = new GCloud();
 
+
 export class GCloudRoute extends BaseRoute {
     public static create(router: Router) {
 
@@ -21,7 +23,8 @@ export class GCloudRoute extends BaseRoute {
 
     //add gcloud page route
     router.get("/gCloud", (req: Request, res: Response, next: NextFunction) => {
-      new GCloudRoute().gcloud(req, res, next);
+    let bucketlist = GetBuckets()
+    new GCloudRoute().gcloud(req, res, next);
     });
 
     router.get("/gCloud/test", (req: Request, res: Response, next: NextFunction) => {
@@ -32,6 +35,11 @@ export class GCloudRoute extends BaseRoute {
     router.get("/gcloud/testgcloudconnection", (req: Request, res: Response, next: NextFunction) => {
       console.log('BUCKET LIST: ')
       testgCloudConnection();
+    });
+
+    router.get("/gCloud/getbuckets", (req: Request, res: Response, next: NextFunction) => {
+      console.log('GET BUCKETS');
+      GetBuckets();
     });
 
     router.get("/gCloud/bucketlist", (req: Request, res: Response, next: NextFunction) => {
@@ -63,12 +71,18 @@ export class GCloudRoute extends BaseRoute {
     super();
   }
 
-  public gcloud(req: Request, res: Response, next: NextFunction) {
+  public gcloud(req: Request, res: Response, next: NextFunction ) {
     this.title = "gCloud | Raspberry Pi Server";
     let options: Object = {
-      "message": "GOOGLE CLOUD"
+      "message": "GOOGLE CLOUD",
+      "bucketlist" : "syncBuckets()"
     };
-
     this.render(req, res, "gcloud", options);
   }
 }
+
+
+
+
+
+

@@ -13,7 +13,7 @@ export class FirebaseDBRoute extends BaseRoute {
             new FirebaseDBRoute().firebaseDB(req, res, next);
         });
 
-        router.post("/Firebase/test", (req: Request, res: Response, next: NextFunction) => {
+        router.get("/Firebase/test", (req: Request, res: Response, next: NextFunction) => {
             console.log('TESTING FIREBASE: ')
             testFirebaseDB(firebaseDB);
         });

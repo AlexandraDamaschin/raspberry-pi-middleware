@@ -9,7 +9,7 @@ class FirebaseDBRoute extends route_1.BaseRoute {
         router.get("/Firebase", (req, res, next) => {
             new FirebaseDBRoute().firebaseDB(req, res, next);
         });
-        router.post("/Firebase/test", (req, res, next) => {
+        router.get("/Firebase/test", (req, res, next) => {
             console.log('TESTING FIREBASE: ');
             firebasedb_model_1.testFirebaseDB(firebaseDB);
         });

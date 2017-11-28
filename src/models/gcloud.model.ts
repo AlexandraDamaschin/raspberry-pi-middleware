@@ -1,7 +1,7 @@
 export class GCloud {
   private config = {
     projectId: 'project300awesomedatabase',
-    keyFilename: './config/auth/project300awesomedatabase-0ab923a65487.json'
+    keyFilename: './config/auth/project300awesomedatabase-7cdd21c641ed.json'
   };
   private storage = require('@google-cloud/storage')(this.config);
   private bucketName = 'project300awesomedatabase.appspot.com';
@@ -18,6 +18,25 @@ export class GCloud {
   //       console.error('ERROR:', err);
   //     });
   // }
+
+
+public getAllBuckets() {
+  this.storage
+  .getBuckets()
+  .then(results => {
+    const buckets = results[0];
+    
+    console.log('Buckets:');
+    buckets.forEach(bucket => {
+      console.log(bucket.name);
+    });
+    return buckets;
+  })
+  .catch(err => {
+    console.error('ERROR:', err);
+  });
+}
+
 
   public test_gCloud() {
     this.storage
@@ -234,3 +253,31 @@ export function testgCloudConnection() {
     });
   // [END storage_list_buckets]
 }
+
+
+
+export function GetBuckets() {
+  const Storage = require('@google-cloud/storage');
+  const storage = Storage({
+    projectId: 'project300awesomedatabase',
+    keyFilename: './config/auth/project300awesomedatabase-7cdd21c641ed.json'
+  });
+  const bucketlist = '';
+  storage
+    .getBuckets()
+    .then(results => {
+      const buckets = results[0];
+      
+      console.log('Buckets:');
+      buckets.forEach(bucket => {
+        console.log(bucket.name);
+        this.bucketlist += bucket.name;
+      });
+      
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+    return bucketlist;
+}
+

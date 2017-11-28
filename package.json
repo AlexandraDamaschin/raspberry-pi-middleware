@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development nodemon ./bin/www",
+    "dev": "nodemon ./bin/www",
     "grunt": "grunt",
     "start": "node ./bin/www"
   },
@@ -12,6 +12,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@google-cloud/error-reporting": "^0.2.2",
+    "@types/firebase": "^2.4.32",
     "@types/body-parser": "^1.16.8",
     "@types/cookie-parser": "^1.4.1",
     "@types/errorhandler": "0.0.32",
@@ -26,8 +28,6 @@
     "typescript": "^2.6.1"
   },
   "dependencies": {
-    "@google-cloud/error-reporting": "^0.2.2",
-    "@types/firebase": "^2.4.32",
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
     "errorhandler": "^1.5.0",

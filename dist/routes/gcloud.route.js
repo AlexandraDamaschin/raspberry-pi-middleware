@@ -7,6 +7,7 @@ class GCloudRoute extends route_1.BaseRoute {
     static create(router) {
         console.log("Creating google cloud routes.");
         router.get("/gCloud", (req, res, next) => {
+            let bucketlist = gcloud_model_1.GetBuckets();
             new GCloudRoute().gcloud(req, res, next);
         });
         router.get("/gCloud/test", (req, res, next) => {
@@ -16,6 +17,10 @@ class GCloudRoute extends route_1.BaseRoute {
         router.get("/gcloud/testgcloudconnection", (req, res, next) => {
             console.log('BUCKET LIST: ');
             gcloud_model_1.testgCloudConnection();
+        });
+        router.get("/gCloud/getbuckets", (req, res, next) => {
+            console.log('GET BUCKETS');
+            gcloud_model_1.GetBuckets();
         });
         router.get("/gCloud/bucketlist", (req, res, next) => {
             console.log('BUCKET LIST: ');
@@ -43,7 +48,8 @@ class GCloudRoute extends route_1.BaseRoute {
     gcloud(req, res, next) {
         this.title = "gCloud | Raspberry Pi Server";
         let options = {
-            "message": "GOOGLE CLOUD"
+            "message": "GOOGLE CLOUD",
+            "bucketlist": "syncBuckets()"
         };
         this.render(req, res, "gcloud", options);
     }
