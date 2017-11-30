@@ -1,10 +1,10 @@
 export class GCloud {
   private config = {
-    projectId: 'project300awesomedatabase',
-    keyFilename: './config/auth/project300awesomedatabase-7cdd21c641ed.json'
+    projectId: 'projectawesomebox',
+    keyFilename: './config/auth/projectawesomebox-firebase-adminsdk-g696q-10b4b10427.json'
   };
   private storage = require('@google-cloud/storage')(this.config);
-  private bucketName = 'project300awesomedatabase.appspot.com';
+  private bucketName = 'projectawesomebox.appspot.com';
 
   // public create_bucket(){
   //   const bucketName = 'my-new-bucket';
