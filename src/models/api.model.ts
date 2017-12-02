@@ -1,3 +1,4 @@
+import { PiData } from './PiData';
 import { GCloud } from './gcloud.model';
 import { takePhoto, Camera } from "./camera.model";
 import { FirebaseDB } from './firebasedb.model';
@@ -26,6 +27,18 @@ export function b64StringToFile(filename, base64String) {
     fs.writeFile('./camera/' + filename, base64Image, { encoding: 'base64' }, function (err) {
         console.log('File created: ./camera/' + filename);
     });
+}
+
+export function storeAndUploadFromPi(data : PiData){
+    let filename = data.date + data.imageFormat;
+    b64StringToFile(filename, data.base64);
+
+    let database = new FirebaseDB();
+    let storage = new GCloud();
+    console.log("filename is " + filename);
+    storage.upload_file(filename);
+    database.uploadUserPhoto(filename, data)
+
 }
 
 export function b64StringToFileTest() {

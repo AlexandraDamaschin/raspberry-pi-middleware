@@ -13,7 +13,7 @@ class GCloud {
             this.storage
                 .bucket(this.bucketName)
                 .upload(filename)
-                .then(() => {
+                .then((res) => {
                 console.log(`${filename} uploaded to ${this.bucketName}.`);
             })
                 .catch(err => {

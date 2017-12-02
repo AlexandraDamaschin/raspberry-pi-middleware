@@ -35,6 +35,19 @@ class FirebaseDB {
             }
         }
     }
+    uploadUserPhoto(filename, data) {
+        var newPhotoKey = capturedPhotosRef.push().key;
+        delete data.base64;
+        delete data.imageFormat;
+        data.storageLocation = "gs://projectawesomebox.appspot.com/" + [filename];
+        try {
+            capturedPhotosRef.push(data);
+        }
+        catch (e) {
+            if (console.log(e)) {
+            }
+        }
+    }
     uploadTestData() {
         try {
             capturedPhotosRef.set({

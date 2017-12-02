@@ -1,3 +1,4 @@
+import { PiData } from './PiData';
 var admin = require("firebase-admin");
 var serviceAccount = require("../../config/auth/projectawesomebox-firebase-adminsdk-g696q-10b4b10427.json");
 
@@ -41,6 +42,20 @@ export class FirebaseDB {
         }
     }
 
+    public uploadUserPhoto(filename, data: PiData) {
+        var newPhotoKey = capturedPhotosRef.push().key;
+        delete data.base64;
+        delete data.imageFormat;
+        data.storageLocation = "gs://projectawesomebox.appspot.com/" + [filename]
+        try {
+            capturedPhotosRef.push(data);
+        }
+        catch (e) {
+            if (console.log(e)) {
+            }
+        }
+    }
+
     public uploadTestData() {
         try {
             capturedPhotosRef.set({
@@ -64,7 +79,7 @@ export class FirebaseDB {
 
 export function uploadPhotoDetails(c: FirebaseDB) {
     c.uploadPhotoDetails("capture-1511606668308.jpg", "test@email.com"),
-    c.uploadPhotoDetails("capture-1511614424637.jpg", "test@email.com")
+        c.uploadPhotoDetails("capture-1511614424637.jpg", "test@email.com")
 }
 
 export function uploadTestData(c: FirebaseDB) {

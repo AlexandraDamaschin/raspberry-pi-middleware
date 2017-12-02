@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const express = require("express");
 const logger = require("morgan");
 const path = require("path");
+const cors = require("cors");
 const errorHandler = require("errorhandler");
 const methodOverride = require("method-override");
 const index_route_1 = require("./routes/index.route");
@@ -28,10 +29,14 @@ class Server {
         this.app.set("views", path.join(__dirname, "views"));
         this.app.set("view engine", "pug");
         this.app.use(logger("dev"));
-        this.app.use(bodyParser.json());
-        this.app.use(bodyParser.urlencoded({
-            extended: true
+        this.app.use(bodyParser.json({
+            limit: '50mb'
         }));
+        this.app.use(bodyParser.urlencoded({
+            extended: true,
+            limit: '50mb'
+        }));
+        this.app.use(cors({ origin: true }));
         this.app.use(cookieParser("SECRET_GOES_HERE"));
         this.app.use(methodOverride());
         this.app.use(function (err, req, res, next) {
