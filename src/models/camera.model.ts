@@ -4,7 +4,7 @@ import * as moment from 'moment';
 
 let now = moment();
 now.toISOString();
-let fileName = 'capture-' + now + '.jpg';
+let fileName = 'PI01-' + now + '.jpg';
 
 export class Camera {
 
@@ -26,6 +26,25 @@ export class Camera {
             console.log(`Capture image exited with code: ${code}`)
         });
     }
+
+    public take_photo_name = function (newName) {
+        const { spawn } = require('child_process');
+        const captureImage = spawn('raspistill', ['-w', '640', '-h', '480', '-vf', '-hf', '-o', 'capture.jpg']);
+
+        captureImage.stdout.on('data', (data) => {
+            console.log(`stdout: ${data}`);
+        });
+        captureImage.stderr.on('data', (data) => {
+            console.log(`stderr: ${data}`);
+        });
+        captureImage.on('close', (code) => {
+            fs.move('capture.jpg', './camera/' + newName, function (err) {
+                if (err) throw err;
+            });
+            console.log(`Capture image exited with code: ${code}`)
+        });
+    }
+
 
     public take_upload_photo = function () {
         const { spawn } = require('child_process');

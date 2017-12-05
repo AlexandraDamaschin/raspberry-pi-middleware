@@ -1,16 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const gcloud_model_1 = require("./gcloud.model");
+const camera_model_1 = require("./camera.model");
 const firebasedb_model_1 = require("./firebasedb.model");
 const fs = require("fs.extra");
+const moment = require("moment");
 class API {
 }
 exports.API = API;
 function captureAndUpload() {
+    let camera = new camera_model_1.Camera();
     let database = new firebasedb_model_1.FirebaseDB();
     let storage = new gcloud_model_1.GCloud();
-    storage.upload_file('test-file.jpg');
-    database.uploadPhotoDetails('test-file.jpg', 'test@test.com');
+    let photo = camera.take_photo();
+    storage.upload_file('test-file01.jpg');
+    database.uploadPhotoDetails('test-file01.jpg', 'test@test.com');
 }
 exports.captureAndUpload = captureAndUpload;
 function b64StringToFile(filename, base64String) {
@@ -39,3 +43,22 @@ function b64StringToFileTest() {
     });
 }
 exports.b64StringToFileTest = b64StringToFileTest;
+function demoMode() {
+    function fn60sec() {
+        let camera = new camera_model_1.Camera();
+        let database = new firebasedb_model_1.FirebaseDB();
+        let storage = new gcloud_model_1.GCloud();
+        let now = moment();
+        now.toISOString();
+        let fileName = 'PI01-' + now + '.jpg';
+        let photo = camera.take_photo_name(fileName);
+        console.log(`CAPTURED: ${fileName}`);
+        setTimeout(function () {
+            storage.upload_file(fileName);
+            console.log(`UPLOADED: ${fileName}`);
+        }, 30000);
+    }
+    fn60sec();
+    setInterval(fn60sec, 60 * 1000);
+}
+exports.demoMode = demoMode;

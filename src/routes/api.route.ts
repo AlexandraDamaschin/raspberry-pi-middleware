@@ -1,6 +1,6 @@
 import { BaseRoute } from "./route";
 import { Router, Request, Response, NextFunction } from "express";
-import { API, captureAndUpload, b64StringToFile, storeAndUploadFromPi } from "../models/api.model";
+import { API, b64StringToFile, captureAndUpload, demoMode, storeAndUploadFromPi } from '../models/api.model';
 import { PiData } from "../models/PiData";
 
 let api = new API();
@@ -18,6 +18,13 @@ export class APIRoute extends BaseRoute {
             console.log('Capture and Upload')
             captureAndUpload();
         });
+
+        router.get("/API/DemoMode", (req: Request, res: Response, next: NextFunction) => {
+            console.log('DEMO MODE')
+            demoMode();
+            res.send('{"status": "demomode"}')
+        });
+
         router.get("/API/b64", (req: Request, res: Response, next: NextFunction) => {
             console.log('Base 64 Convertor')
             b64StringToFile('mytestfile.png',

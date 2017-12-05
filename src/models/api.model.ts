@@ -3,20 +3,20 @@ import { GCloud } from './gcloud.model';
 import { takePhoto, Camera } from "./camera.model";
 import { FirebaseDB } from './firebasedb.model';
 import * as fs from 'fs.extra';
-
+import * as moment from 'moment';
 export class API {
 
 }
 
 
 export function captureAndUpload() {
-    // let camera = new Camera();
+    let camera = new Camera();
     let database = new FirebaseDB();
     let storage = new GCloud();
 
-    // let photo = camera.take_photo();
-    storage.upload_file('test-file.jpg');
-    database.uploadPhotoDetails('test-file.jpg', 'test@test.com')
+    let photo = camera.take_photo();
+    storage.upload_file('test-file01.jpg');
+    database.uploadPhotoDetails('test-file01.jpg', 'test@test.com')
 
 }
 
@@ -29,7 +29,7 @@ export function b64StringToFile(filename, base64String) {
     });
 }
 
-export function storeAndUploadFromPi(data : PiData){
+export function storeAndUploadFromPi(data: PiData) {
     let filename = data.date + data.imageFormat;
     b64StringToFile(filename, data.base64);
 
@@ -49,3 +49,69 @@ export function b64StringToFileTest() {
         console.log('File created');
     });
 }
+
+
+export function demoMode() {
+    function fn60sec() {
+        let camera = new Camera();
+        let database = new FirebaseDB();
+        let storage = new GCloud();
+        let now = moment();
+        now.toISOString();
+        let fileName = 'PI01-' + now + '.jpg';
+
+        let photo = camera.take_photo_name(fileName)
+        console.log(`CAPTURED: ${fileName}`);
+        setTimeout(function () {
+            storage.upload_file(fileName);
+            console.log(`UPLOADED: ${fileName}`);
+        }, 30000);
+    }
+    fn60sec();
+    setInterval(fn60sec, 60*1000);
+}
+
+
+    // database.uploadPhotoDetails(fileName, 'test@test.com')
+    // console.log(fileName);
+    // function capture(next) {
+    //     console.log('CAPTURE');
+    //     camera.take_photo_name(fileName)
+    //     var start = new Date().getTime();
+    //     for (var i = 0; i < 1e7; i++) {
+    //         if ((new Date().getTime() - start) > 60000) {
+    //             break;
+    //         }
+    //     }
+    //     console.log(`time up`)
+    //     next();
+    // }
+    // function wait(next) {
+    //     console.log('WAIT');
+    //     var start = new Date().getTime();
+    //     for (var i = 0; i < 1e7; i++) {
+    //         if ((new Date().getTime() - start) > 60000) {
+    //             break;
+    //         }
+    //     }
+    //     next();
+    // }
+    // function upload(next) {
+    //     console.log('UPLOAD');
+    //     storage.upload_file(fileName)
+    //     next();
+    // }
+    // function record(next) {
+    //     console.log('RECORD');
+    //     database.uploadPhotoDetails(fileName, 'test@test.com')
+    //     next();
+    // }
+
+
+    // let fns = [capture, wait, upload, record ];
+    // function chain(fn) {
+    //     if (fn) {
+    //         fn(() => chain(fns.shift()));
+    //     }
+    // }
+    // chain(fns.shift());
