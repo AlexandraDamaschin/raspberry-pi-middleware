@@ -35,10 +35,13 @@ export function storeAndUploadFromPi(data: PiData) {
 
     let database = new FirebaseDB();
     let storage = new GCloud();
-    console.log("filename is " + filename);
-    storage.upload_file(filename);
-    database.uploadUserPhoto(filename, data)
 
+    storage.uploadFileAndGetDownloadURL(filename).then((signedUrls) => {
+        data.downloadURL = signedUrls[0];
+        database.uploadUserData(filename, data);
+    }).catch(err => {
+        console.error('ERROR:', err);
+    });
 }
 
 export function b64StringToFileTest() {

@@ -7,4 +7,5 @@ export interface PiData{
     imageFormat: string;
     base64: string;
     storageLocation: string;
+    downloadURL: string;
 }

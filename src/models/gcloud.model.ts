@@ -20,22 +20,22 @@ export class GCloud {
   // }
 
 
-public getAllBuckets() {
-  this.storage
-  .getBuckets()
-  .then(results => {
-    const buckets = results[0];
-    
-    console.log('Buckets:');
-    buckets.forEach(bucket => {
-      console.log(bucket.name);
-    });
-    return buckets;
-  })
-  .catch(err => {
-    console.error('ERROR:', err);
-  });
-}
+  public getAllBuckets() {
+    this.storage
+      .getBuckets()
+      .then(results => {
+        const buckets = results[0];
+
+        console.log('Buckets:');
+        buckets.forEach(bucket => {
+          console.log(bucket.name);
+        });
+        return buckets;
+      })
+      .catch(err => {
+        console.error('ERROR:', err);
+      });
+  }
 
 
   public test_gCloud() {
@@ -116,6 +116,21 @@ public getAllBuckets() {
         console.error('ERROR:', err);
       });
   };
+
+  public uploadFileAndGetDownloadURL(fileName): Promise<any> {
+    var filename = './camera/' + fileName;
+    return this.storage.bucket(this.bucketName).upload(filename).then(() => {
+      return this.getDownloadUrl(fileName);
+    });
+  }
+
+  public getDownloadUrl(fileName: string): Promise<any> {
+    let fileRef = this.storage.bucket(this.bucketName).file(fileName);
+    return fileRef.getSignedUrl({
+      action: 'read',
+      expires: '03-09-2491'
+    });
+  }
 
 
   public download_file = function (fileName) {
@@ -267,17 +282,17 @@ export function GetBuckets() {
     .getBuckets()
     .then(results => {
       const buckets = results[0];
-      
+
       console.log('Buckets:');
       buckets.forEach(bucket => {
         console.log(bucket.name);
         this.bucketlist += bucket.name;
       });
-      
+
     })
     .catch(err => {
       console.error('ERROR:', err);
     });
-    return bucketlist;
+  return bucketlist;
 }
 

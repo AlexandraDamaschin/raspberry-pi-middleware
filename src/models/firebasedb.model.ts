@@ -42,13 +42,13 @@ export class FirebaseDB {
         }
     }
 
-    public uploadUserPhoto(filename, data: PiData) {
-        var newPhotoKey = capturedPhotosRef.push().key;
+    public uploadUserData(filename, data: PiData) {
         delete data.base64;
         delete data.imageFormat;
         data.storageLocation = "gs://projectawesomebox.appspot.com/" + [filename]
         try {
             capturedPhotosRef.push(data);
+            console.log("all done");
         }
         catch (e) {
             if (console.log(e)) {
