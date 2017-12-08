@@ -8,4 +8,6 @@ export interface PiData{
     base64: string;
     storageLocation: string;
     downloadURL: string;
+    address: string;
+    placeID: string;
 }
