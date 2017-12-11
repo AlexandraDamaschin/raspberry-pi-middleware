@@ -55,7 +55,16 @@ export class FirebaseDB {
             }
         }
     }
-
+    public uploadDemoData(filename, metadata) {
+        try {
+            capturedPhotosRef.push(metadata);
+            console.log(`UPLOADED METADATA`);
+        }
+        catch (e) {
+            if (console.log(e)) {
+            }
+        }
+    }
     public uploadTestData() {
         try {
             capturedPhotosRef.set({
